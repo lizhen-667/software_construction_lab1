@@ -1,1 +1,6 @@
 *.claude
+ # 追加到 .gitignore
+  __pycache__/
+  *.pyc
+  .playwright-mcp/
+  ~$*
