@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<title>MB-OBS-5 观测记录列表</title><style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary:#0e7490; --primary-2:#0891b2; --primary-l:#e0f2f7; --primary-ll:#f0f9ff;
+  --ink:#1e293b; --ink-2:#475569; --ink-3:#94a3b8; --line:#e2e8f0; --line-2:#cbd5e1;
+  --bg:#f1f5f9; --card:#ffffff;
+  --ok:#15803d; --ok-l:#dcfce7; --warn:#b45309; --warn-l:#fef3c7;
+  --err:#b91c1c; --err-l:#fee2e2; --info:#1d4ed8; --info-l:#dbeafe;
+}
+html,body { width:1440px; min-height:900px; }
+body {
+  font-family:"Microsoft YaHei","PingFang SC","Source Han Sans SC","Segoe UI",sans-serif;
+  font-size:13px; color:var(--ink); background:var(--bg); -webkit-font-smoothing:antialiased;
+}
+.app { display:flex; width:1440px; min-height:900px; }
+
+/* ---------------- 侧边导航 ---------------- */
+.side { width:216px; flex:0 0 216px; background:#0b4251; color:#cbe6ee; display:flex; flex-direction:column; }
+.brand { height:56px; display:flex; align-items:center; gap:9px; padding:0 16px; border-bottom:1px solid #12566a; }
+.brand .logo { width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#22d3ee,#0891b2);
+  display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff; }
+.brand b { color:#fff; font-size:13.5px; font-weight:600; letter-spacing:.3px; line-height:1.25; }
+.brand span { font-size:9.5px; color:#7fbecf; letter-spacing:.6px; display:block; }
+.nav { padding:10px 0; flex:1; }
+.nav .grp { font-size:10.5px; color:#5d9db0; padding:10px 18px 5px; letter-spacing:.8px; }
+.nav a { display:flex; align-items:center; gap:9px; padding:8.5px 18px; color:#cbe6ee;
+  text-decoration:none; font-size:13px; border-left:3px solid transparent; }
+.nav a .ic { width:15px; text-align:center; font-size:13px; opacity:.9; }
+.nav a.on { background:#0e7490; color:#fff; border-left-color:#67e8f9; font-weight:600; }
+.nav a .badge { margin-left:auto; background:#dc2626; color:#fff; font-size:10px;
+  border-radius:9px; padding:1px 6px; font-weight:600; }
+.side .foot { padding:11px 16px; border-top:1px solid #12566a; font-size:11px; color:#6fa8b8; }
+
+/* ---------------- 主区 ---------------- */
+.main { flex:1; display:flex; flex-direction:column; min-width:0; }
+.topbar { height:56px; flex:0 0 56px; background:#fff; border-bottom:1px solid var(--line);
+  display:flex; align-items:center; padding:0 22px; gap:14px; }
+.topbar .sys { font-size:12px; color:var(--ink-3); }
+.topbar .spacer { flex:1; }
+.topbar .search { width:230px; height:32px; border:1px solid var(--line-2); border-radius:17px;
+  display:flex; align-items:center; padding:0 13px; gap:7px; color:var(--ink-3); font-size:12px; background:#f8fafc; }
+.topbar .bell { position:relative; font-size:16px; color:var(--ink-2); }
+.topbar .bell i { position:absolute; top:-2px; right:-3px; width:7px;height:7px;background:#dc2626;border-radius:50%; }
+.topbar .who { display:flex; align-items:center; gap:8px; padding-left:14px; border-left:1px solid var(--line); }
+.avatar { width:30px;height:30px;border-radius:50%;background:var(--primary); color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600; }
+.who .nm { font-size:12.5px; font-weight:600; line-height:1.3; }
+.who .rl { font-size:10.5px; color:var(--ink-3); }
+
+.content { flex:1; padding:16px 22px 22px; }
+.crumbs { font-size:12px; color:var(--ink-3); margin-bottom:9px; }
+.crumbs b { color:var(--ink-2); font-weight:500; }
+.ptitle { display:flex; align-items:center; gap:12px; margin-bottom:13px; }
+.ptitle h1 { font-size:19px; font-weight:600; letter-spacing:.2px; }
+.ptitle .sub { font-size:12px; color:var(--ink-3); }
+.ptitle .acts { margin-left:auto; display:flex; gap:8px; }
+.pgno { font-size:11px; color:var(--primary); background:var(--primary-ll); border:1px dashed #7dd3e0;
+  border-radius:4px; padding:3px 9px; font-family:Consolas,monospace; letter-spacing:.4px; }
+
+/* ---------------- 按钮 ---------------- */
+.btn { display:inline-flex; align-items:center; gap:5px; height:31px; padding:0 14px; border-radius:5px;
+  border:1px solid var(--line-2); background:#fff; color:var(--ink); font-size:12.5px; cursor:default; font-family:inherit; }
+.btn.pri { background:var(--primary); border-color:var(--primary); color:#fff; font-weight:500; }
+.btn.gh { background:transparent; border-color:transparent; color:var(--primary); padding:0 8px; }
+.btn.dg { border-color:#fca5a5; color:var(--err); }
+.btn.sm { height:25px; padding:0 9px; font-size:11.5px; border-radius:4px; }
+.btn[disabled] { color:var(--ink-3); background:#f1f5f9; }
+
+/* ---------------- 卡片 / 面板 ---------------- */
+.card { background:var(--card); border:1px solid var(--line); border-radius:8px; }
+.card > .hd { padding:11px 16px; border-bottom:1px solid var(--line); display:flex; align-items:center;
+  gap:9px; font-size:13.5px; font-weight:600; }
+.card > .hd .tag { margin-left:auto; }
+.card > .bd { padding:16px; }
+.card + .card { margin-top:13px; }
+.hd .bar { width:3px; height:14px; background:var(--primary); border-radius:2px; }
+
+/* ---------------- 筛选条 ---------------- */
+.filters { background:#fff; border:1px solid var(--line); border-radius:8px; padding:13px 16px 5px;
+  display:flex; flex-wrap:wrap; gap:12px 18px; align-items:flex-end; margin-bottom:13px; }
+.fld { display:flex; flex-direction:column; gap:5px; }
+.fld > label { font-size:11.5px; color:var(--ink-2); }
+.fld .req::before { content:"*"; color:var(--err); margin-right:3px; }
+.ipt { height:31px; border:1px solid var(--line-2); border-radius:5px; background:#fff; padding:0 10px;
+  font-size:12.5px; color:var(--ink); min-width:150px; display:flex; align-items:center; gap:6px; }
+.ipt.ph { color:var(--ink-3); }
+.ipt .car { margin-left:auto; color:var(--ink-3); font-size:9px; }
+.ipt.sel { justify-content:space-between; }
+.filters .go { margin-left:auto; display:flex; gap:8px; padding-bottom:9px; }
+
+/* ---------------- 表格 ---------------- */
+table.tb { width:100%; border-collapse:collapse; font-size:12.5px; }
+table.tb th { background:#f8fafc; color:var(--ink-2); font-weight:600; text-align:left;
+  padding:10px 12px; border-bottom:1px solid var(--line); white-space:nowrap; font-size:12px; }
+table.tb td { padding:10px 12px; border-bottom:1px solid #f1f5f9; color:var(--ink); vertical-align:middle; }
+table.tb tr:last-child td { border-bottom:none; }
+table.tb tbody tr.hl { background:var(--primary-ll); }
+.ck { width:14px;height:14px;border:1px solid var(--line-2);border-radius:3px;display:inline-block;background:#fff; }
+.ck.ckd { background:var(--primary); border-color:var(--primary); position:relative; }
+.ck.ckd::after { content:"\2713"; color:#fff; font-size:10px; position:absolute; left:2px; top:-2px; }
+.thumb { width:34px;height:34px;border-radius:5px;background:var(--primary-l);border:1px solid #bae6fd;
+  display:flex;align-items:center;justify-content:center;font-size:15px; }
+.lk { color:var(--primary); font-weight:500; }
+.lk.p { color:var(--ink-3); font-weight:400; }
+.lnks { display:flex; gap:11px; }
+.mono { font-family:Consolas,monospace; font-size:11.5px; color:var(--ink-2); }
+
+/* ---------------- 标签 ---------------- */
+.tag { display:inline-flex; align-items:center; gap:4px; height:21px; padding:0 8px; border-radius:11px;
+  font-size:11px; font-weight:500; background:#f1f5f9; color:var(--ink-2); }
+.tag.ok { background:var(--ok-l); color:var(--ok); }
+.tag.warn { background:var(--warn-l); color:var(--warn); }
+.tag.err { background:var(--err-l); color:var(--err); }
+.tag.info { background:var(--info-l); color:var(--info); }
+.tag.pri { background:var(--primary-l); color:var(--primary); }
+.dot { width:6px;height:6px;border-radius:50%;display:inline-block;background:currentColor; }
+
+/* ---------------- 分页 ---------------- */
+.pager { display:flex; align-items:center; gap:7px; padding:12px 4px 0; font-size:12px; color:var(--ink-2); }
+.pager .tot { margin-right:auto; color:var(--ink-3); }
+.pg { min-width:27px;height:27px;border:1px solid var(--line-2);border-radius:5px;background:#fff;
+  display:inline-flex;align-items:center;justify-content:center;font-size:12px; }
+.pg.on { background:var(--primary); border-color:var(--primary); color:#fff; font-weight:600; }
+
+/* ---------------- 表单 ---------------- */
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px 20px; }
+.grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px 20px; }
+.full { grid-column:1 / -1; }
+.ta { border:1px solid var(--line-2); border-radius:5px; min-height:62px; padding:8px 10px;
+  font-size:12.5px; color:var(--ink-2); background:#fff; line-height:1.6; }
+.fh { display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--ink);
+  margin:4px 0 14px; padding-bottom:9px; border-bottom:1px dashed var(--line); }
+.fh .n { width:19px;height:19px;border-radius:50%;background:var(--primary);color:#fff;font-size:11px;
+  display:flex;align-items:center;justify-content:center; }
+.hint { font-size:11px; color:var(--ink-3); }
+.errmsg { font-size:11px; color:var(--err); }
+
+/* ---------------- 统计卡 ---------------- */
+.stats { display:grid; grid-template-columns:repeat(4,1fr); gap:13px; margin-bottom:13px; }
+.stat { background:#fff; border:1px solid var(--line); border-radius:8px; padding:14px 16px; }
+.stat .lb { font-size:11.5px; color:var(--ink-3); display:flex; align-items:center; gap:6px; }
+.stat .vl { font-size:25px; font-weight:700; margin:6px 0 3px; letter-spacing:.5px; }
+.stat .vl small { font-size:12px; font-weight:400; color:var(--ink-3); margin-left:3px; }
+.stat .dt { font-size:11px; color:var(--ink-3); }
+.stat .dt b { color:var(--ok); font-weight:600; }
+.stat .dt b.dn { color:var(--err); }
+
+/* ---------------- 图表 ---------------- */
+.chartbox { background:#fff; border:1px solid var(--line); border-radius:8px; padding:14px 16px; }
+.chartbox h3 { font-size:13px; font-weight:600; margin-bottom:3px; }
+.chartbox .cs { font-size:11px; color:var(--ink-3); margin-bottom:12px; }
+.legend { display:flex; flex-wrap:wrap; gap:6px 16px; margin-top:11px; font-size:11.5px; color:var(--ink-2); }
+.legend span { display:flex; align-items:center; gap:5px; }
+.legend i { width:9px;height:9px;border-radius:2px;display:inline-block; }
+.bars { display:flex; flex-direction:column; gap:9px; }
+.brow { display:flex; align-items:center; gap:10px; font-size:12px; }
+.brow .bl { width:88px; color:var(--ink-2); text-align:right; }
+.brow .bt { flex:1; height:15px; background:#f1f5f9; border-radius:3px; overflow:hidden; }
+.brow .bf { height:100%; background:linear-gradient(90deg,#0891b2,#22d3ee); border-radius:3px; }
+.brow .bv { width:56px; color:var(--ink-2); font-family:Consolas,monospace; font-size:11.5px; }
+
+/* ---------------- 地图 ---------------- */
+.map { position:relative; background:#e8f4f8; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+.map .grid-l { position:absolute; inset:0;
+  background-image:linear-gradient(#cfe6ee 1px,transparent 1px),linear-gradient(90deg,#cfe6ee 1px,transparent 1px);
+  background-size:44px 44px; }
+.map .land { position:absolute; background:#d7e9d9; border:1px solid #a8ccae; border-radius:26px 44px 30px 40px; }
+.map .ctrls { position:absolute; top:12px; right:12px; display:flex; flex-direction:column; gap:5px; }
+.map .ctrls div { width:29px;height:29px;background:#fff;border:1px solid var(--line-2);border-radius:5px;
+  display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--ink-2); }
+.map .scale { position:absolute; left:12px; bottom:11px; background:rgba(255,255,255,.9); border:1px solid var(--line-2);
+  border-radius:4px; padding:3px 9px; font-size:10.5px; color:var(--ink-2); font-family:Consolas,monospace; }
+.pin { position:absolute; width:15px; height:15px; border-radius:50% 50% 50% 0; transform:rotate(-45deg);
+  border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.3); }
+.pin::after { content:""; position:absolute; inset:3.5px; background:#fff; border-radius:50%; }
+.pop { position:absolute; background:#fff; border:1px solid var(--line-2); border-radius:6px; padding:9px 11px;
+  font-size:11.5px; box-shadow:0 4px 14px rgba(15,23,42,.16); min-width:160px; z-index:5; }
+.pop b { display:block; font-size:12.5px; margin-bottom:5px; }
+.pop .r { color:var(--ink-2); line-height:1.7; }
+.pop .r em { color:var(--ink-3); font-style:normal; display:inline-block; width:52px; }
+
+/* ---------------- 弹窗 ---------------- */
+.mask { position:absolute; inset:0; background:rgba(15,23,42,.42); display:flex;
+  align-items:center; justify-content:center; z-index:50; }
+.dlg { background:#fff; border-radius:9px; width:520px; box-shadow:0 18px 48px rgba(15,23,42,.28); overflow:hidden; }
+.dlg.wide { width:680px; }
+.dlg > .dh { padding:14px 18px; border-bottom:1px solid var(--line); font-size:14.5px; font-weight:600;
+  display:flex; align-items:center; }
+.dlg > .dh .x { margin-left:auto; color:var(--ink-3); font-size:16px; }
+.dlg > .db { padding:18px; max-height:440px; overflow:hidden; }
+.dlg > .df { padding:12px 18px; border-top:1px solid var(--line); background:#f8fafc;
+  display:flex; justify-content:flex-end; gap:9px; }
+
+/* ---------------- 上传区 ---------------- */
+.drop { border:1.5px dashed #7dd3e0; border-radius:8px; background:var(--primary-ll);
+  padding:26px; text-align:center; }
+.drop .ic { font-size:30px; color:var(--primary); }
+.drop .t { font-size:13px; margin:7px 0 4px; }
+.drop .s { font-size:11.5px; color:var(--ink-3); }
+.thumbs { display:flex; gap:10px; margin-top:12px; }
+.thumbs .t { position:relative; width:92px;height:92px;border-radius:7px;background:var(--primary-l);
+  border:1px solid #bae6fd; display:flex;align-items:center;justify-content:center;font-size:26px; }
+.thumbs .t .del { position:absolute; top:-6px; right:-6px; width:19px;height:19px;background:var(--err);
+  color:#fff;border-radius:50%;font-size:12px;display:flex;align-items:center;justify-content:center;
+  border:2px solid #fff; }
+
+/* ---------------- AI 结果 ---------------- */
+.ai { display:flex; gap:14px; }
+.ai .pic { width:178px;height:178px;border-radius:8px;background:var(--primary-l);border:1px solid #bae6fd;
+  display:flex;align-items:center;justify-content:center;font-size:56px;flex:0 0 178px; }
+.ai .res { flex:1; }
+.ai .top { display:flex; align-items:baseline; gap:10px; }
+.ai .top .nm { font-size:20px; font-weight:700; }
+.ai .top .sn { font-size:13px; color:var(--ink-3); font-style:italic; }
+.conf { margin:12px 0 4px; }
+.conf .lb { display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; }
+.conf .lb b { font-size:15px; color:var(--ok); }
+.conf .bar { height:9px; background:#f1f5f9; border-radius:5px; overflow:hidden; }
+.conf .bar i { display:block; height:100%; background:linear-gradient(90deg,#15803d,#4ade80); border-radius:5px; }
+.kv { display:grid; grid-template-columns:86px 1fr; gap:7px 10px; font-size:12.5px; margin-top:13px; }
+.kv dt { color:var(--ink-3); }
+.kv dd { color:var(--ink); }
+.cand { display:flex; align-items:center; gap:10px; padding:9px 11px; border:1px solid var(--line);
+  border-radius:6px; margin-bottom:8px; font-size:12.5px; }
+.cand .pc { margin-left:auto; font-family:Consolas,monospace; color:var(--ink-2); }
+.cand .rk { width:19px;height:19px;border-radius:50%;background:#f1f5f9;color:var(--ink-2);font-size:11px;
+  display:flex;align-items:center;justify-content:center; }
+
+/* ---------------- 问答 ---------------- */
+.chatwrap { display:flex; flex-direction:column; height:640px; }
+.chat { flex:1; overflow:hidden; padding:16px; background:#f8fafc; display:flex; flex-direction:column; gap:15px; }
+.msg { display:flex; gap:10px; max-width:86%; }
+.msg .av { width:31px;height:31px;border-radius:7px;flex:0 0 31px;display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:#fff; }
+.msg.u { align-self:flex-end; flex-direction:row-reverse; }
+.msg.u .av { background:#64748b; }
+.msg.a .av { background:var(--primary); }
+.bub { background:#fff; border:1px solid var(--line); border-radius:9px; padding:11px 13px; font-size:12.5px;
+  line-height:1.75; color:var(--ink); }
+.msg.u .bub { background:var(--primary); border-color:var(--primary); color:#fff; }
+.bub .src { margin-top:9px; padding-top:8px; border-top:1px dashed var(--line); font-size:11px; color:var(--ink-3); }
+.bub ul { margin:7px 0 0 16px; }
+.bub li { margin-bottom:5px; }
+.composer { border-top:1px solid var(--line); background:#fff; padding:12px 16px; display:flex; gap:10px; align-items:center; }
+.composer .in { flex:1; height:38px; border:1px solid var(--line-2); border-radius:19px; padding:0 15px;
+  display:flex; align-items:center; color:var(--ink-3); font-size:12.5px; }
+.quicks { display:flex; gap:8px; flex-wrap:wrap; padding:0 16px 12px; }
+
+/* ---------------- 时间线 / 步骤 ---------------- */
+.tl { padding-left:4px; }
+.tl .it { display:flex; gap:12px; padding-bottom:15px; position:relative; }
+.tl .it:not(:last-child)::before { content:""; position:absolute; left:6px; top:16px; bottom:0; width:1px; background:var(--line); }
+.tl .it .d { width:13px;height:13px;border-radius:50%;border:2px solid var(--primary);background:#fff;
+  margin-top:2px; flex:0 0 13px; z-index:1; }
+.tl .it .d.g { border-color:var(--line-2); }
+.tl .it .c { font-size:12.5px; }
+.tl .it .c .tm { font-size:11px; color:var(--ink-3); margin-top:3px; }
+.steps { display:flex; align-items:center; gap:0; margin-bottom:16px; }
+.steps .s { display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--ink-3); }
+.steps .s .n { width:23px;height:23px;border-radius:50%;background:#f1f5f9;color:var(--ink-3);
+  display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600; }
+.steps .s.on { color:var(--primary); font-weight:600; }
+.steps .s.on .n { background:var(--primary); color:#fff; }
+.steps .s.dn .n { background:var(--ok-l); color:var(--ok); }
+.steps .ln { flex:1; height:1px; background:var(--line-2); margin:0 12px; min-width:34px; }
+
+/* ---------------- 其他 ---------------- */
+.cols { display:flex; gap:13px; align-items:flex-start; }
+.cols > * { min-width:0; }
+.row { display:flex; gap:13px; }
+.note { background:#fffbeb; border:1px solid #fde68a; border-radius:6px; padding:10px 13px;
+  font-size:12px; color:#92400e; line-height:1.7; }
+.note.blue { background:var(--primary-ll); border-color:#bae6fd; color:#0c4a6e; }
+.note .t { font-weight:600; margin-bottom:3px; }
+.chips { display:flex; gap:8px; flex-wrap:wrap; }
+.empty { text-align:center; padding:34px; color:var(--ink-3); font-size:12.5px; }
+.mini { font-size:11.5px; color:var(--ink-3); }
+.tabs { display:flex; gap:2px; border-bottom:1px solid var(--line); margin-bottom:15px; }
+.tabs a { padding:9px 15px; font-size:12.5px; color:var(--ink-2); text-decoration:none; border-bottom:2px solid transparent; }
+.tabs a.on { color:var(--primary); border-bottom-color:var(--primary); font-weight:600; }
+.dl { display:grid; grid-template-columns:112px 1fr; gap:10px 14px; font-size:12.5px; }
+.dl dt { color:var(--ink-3); }
+.hr { height:1px; background:var(--line); margin:15px 0; }
+</style></head><body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><div class="logo">&#127754;</div>
+      <div><b>海洋生物多样性<br>信息管理系统</b><span>MARINE BIODIVERSITY</span></div></div>
+    <nav class="nav"><div class="grp">工作台</div><a class="" href="#"><span class="ic">◲</span>数据看板</a><div class="grp">数据管理</div><a class="" href="#"><span class="ic">🐟</span>物种信息管理</a><a class="" href="#"><span class="ic">🌿</span>生态系统管理</a><a class="on" href="#"><span class="ic">📍</span>观测记录管理</a><div class="grp">分析服务</div><a class="" href="#"><span class="ic">📊</span>数据可视化与报表</a><a class="" href="#"><span class="ic">🤖</span>智能服务</a><div class="grp">系统管理</div><a class="" href="#"><span class="ic">👤</span>用户与权限管理</a></nav>
+    <div class="foot">v1.0 &middot; 广东海洋大学</div>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <span class="sys">科研数据平台 / 观测记录列表</span>
+      <div class="spacer"></div>
+      <div class="search">&#128269; 搜索物种、观测记录…</div>
+      <span class="bell">&#128276;<i></i></span>
+      <div class="who"><div class="avatar">张</div>
+        <div><div class="nm">张海宁</div><div class="rl">科研人员 / 教师</div></div></div>
+    </header>
+    <div class="content">
+      <div class="crumbs">首页 / <b>观测记录管理 / 观测记录列表</b></div>
+      <div class="ptitle"><h1>观测记录列表</h1>
+        <span class="pgno">页面 MB-OBS-5</span><div class="acts"><span class="btn pri sm">新建观测记录</span></div></div>
+      <div class="card"><table class="tb"><thead><tr><th><span class='ck'></span></th><th>观测编号</th><th>观测时间</th><th>地点（经纬度）</th><th>生态系统</th><th>观测人员</th><th>水温 / 盐度</th><th>关联物种</th><th>状态</th></tr></thead><tbody><tr><td><span class="ck"></span></td><td><span class="lk">OBS-2026-0142</span></td><td>2026-10-08 09:20</td><td>湛江港航道外侧<br><span class='mono'>110.42°E, 21.18°N</span></td><td><span class="tag">河口 / 浅海</span></td><td>张海宁</td><td>26.4 ℃ / 30.2 ‰</td><td><span class="tag pri">1</span></td><td><span class="lk">详情</span></td></tr><tr><td><span class="ck"></span></td><td><span class="lk">OBS-2026-0141</span></td><td>2026-10-06 15:40</td><td>徐闻珊瑚礁保护区南片<br><span class='mono'>110.22°E, 20.23°N</span></td><td><span class="tag pri">珊瑚礁</span></td><td>王庆林</td><td>27.1 ℃ / 33.8 ‰</td><td><span class="tag pri">6</span></td><td><span class="lk p">操作中…</span></td></tr></tbody></table><div class="mask"><div class="dlg wide"><div class="dh">编辑观测记录 — OBS-2026-0142<span class="x">&#10005;</span></div><div class="db"><div class="tabs"><a class="on">基本信息</a><a class="">环境参数</a><a class="">关联物种</a></div><div class="grid2"><div class="fld"><label class="req">观测时间</label><div class="ipt"><span class="">2026-10-08 09:20</span><span class="car">&#128197;</span></div></div><div class="fld"><label class="req">所属生态系统</label><div class="ipt sel"><span class="">雷州湾河口浅海生态系统</span><span class="car">&#9660;</span></div></div><div class="fld"><label class="req">观测人员</label><div class="ipt">张海宁、王庆林、李雨欣</div></div><div class="fld"><label>天气 / 海况</label><div class="ipt sel"><span class="">晴，风力 3 级，浪高 0.4 m</span><span class="car">&#9660;</span></div></div><div class="fld full"><label>地点描述</label><div class="ipt">湛江港航道外侧约 2.5 km 处</div></div><div class="fld"><label>经度</label><div class="ipt">110.42</div></div><div class="fld"><label>纬度</label><div class="ipt">21.18</div></div><div class="fld"><label>水温 (℃)</label><div class="ipt">26.4</div></div><div class="fld"><label>盐度 (‰)</label><div class="ipt">30.2</div></div><div class="fld full"><label>观测备注</label><div class="ta">本次观测共发现 3 个物种。中华白海豚群体在航道外侧缓慢游弋约 25 分钟。</div></div></div><div style="margin-top:13px"><div class="note blue">修改观测记录会同步更新模块四中该观测点的统计结果。若已关联物种，可切换到「关联物种」标签页增删关联。</div></div></div><div class="df"><span class="btn  sm">取消</span><span class="btn pri sm">保存修改</span></div></div></div></div>
+    </div>
+  </div>
+</div></body></html>

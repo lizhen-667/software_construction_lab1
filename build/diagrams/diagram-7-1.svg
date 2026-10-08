@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1270" viewBox="0 0 1024 1270" font-family="Microsoft YaHei,SimHei,sans-serif">
+<defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#94A3B8"/></marker><marker id="ar2" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#0E7490"/></marker></defs>
+<g transform="translate(0,30)">
+<rect x="0" y="-30" width="294" height="1270" fill="#F7FBFC" stroke="#D7E3E8"/>
+<rect x="294" y="-30" width="277" height="1270" fill="#FFFFFF" stroke="#D7E3E8"/>
+<rect x="571" y="-30" width="263" height="1270" fill="#F7FBFC" stroke="#D7E3E8"/>
+<rect x="834" y="-30" width="190" height="1270" fill="#FFFFFF" stroke="#D7E3E8"/>
+<rect x="0" y="-30" width="294" height="30" fill="#0B4251"/>
+<text x="147.0" y="-10" text-anchor="middle" font-size="13.5" fill="#FFFFFF" font-weight="bold">用户</text>
+<rect x="294" y="-30" width="277" height="30" fill="#0B4251"/>
+<text x="432.5" y="-10" text-anchor="middle" font-size="13.5" fill="#FFFFFF" font-weight="bold">系统</text>
+<rect x="571" y="-30" width="263" height="30" fill="#0B4251"/>
+<text x="702.5" y="-10" text-anchor="middle" font-size="13.5" fill="#FFFFFF" font-weight="bold">大模型服务</text>
+<rect x="834" y="-30" width="190" height="30" fill="#0B4251"/>
+<text x="929.0" y="-10" text-anchor="middle" font-size="13.5" fill="#FFFFFF" font-weight="bold">模块二 物种信息</text>
+<path d="M147.0,50.0 L147.0,83.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<path d="M147.0,122.0 L147.0,155.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<path d="M147.0,194.0 L147.0,227.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<path d="M147.0,266.0 L147.0,283.0 L432.5,283.0 L432.5,299.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<path d="M432.5,338.0 L432.5,371.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<path d="M432.5,410.0 L432.5,427.0 L702.5,427.0 L702.5,443.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<path d="M702.5,482.0 L702.5,499.0 L432.5,499.0 L432.5,515.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<path d="M432.5,574.0 L432.5,607.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<rect x="432.0" y="576.0" width="19.0" height="15" rx="3" fill="#FFFFFF" fill-opacity="0.92"/>
+<text x="441.5" y="587.0" text-anchor="middle" font-size="11" fill="#B45309">是</text>
+<path d="M432.5,574.0 L432.5,591.0 L147.0,591.0 L147.0,607.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<rect x="247.2" y="576.0" width="85.0" height="15" rx="3" fill="#FFFFFF" fill-opacity="0.92"/>
+<text x="289.8" y="587.0" text-anchor="middle" font-size="11" fill="#B45309">否，转人工确认</text>
+<path d="M432.5,646.0 L432.5,679.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<path d="M432.5,718.0 L432.5,735.0 L929.0,735.0 L929.0,751.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<path d="M929.0,790.0 L929.0,807.0 L147.0,807.0 L147.0,823.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<rect x="501.0" y="792.0" width="74.0" height="15" rx="3" fill="#FFFFFF" fill-opacity="0.92"/>
+<text x="538.0" y="803.0" text-anchor="middle" font-size="11" fill="#B45309">返回匹配结果</text>
+<path d="M147.0,646.0 L147.0,895.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<rect x="130.0" y="756.0" width="52.0" height="15" rx="3" fill="#FFFFFF" fill-opacity="0.92"/>
+<text x="156.0" y="767.0" text-anchor="middle" font-size="11" fill="#B45309">人工选择</text>
+<path d="M147.0,862.0 L147.0,895.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<path d="M147.0,934.0 L147.0,967.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<path d="M147.0,1006.0 L147.0,1023.0 L432.5,1023.0 L432.5,1039.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<path d="M432.5,1078.0 L432.5,1111.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<path d="M432.5,1150.0 L432.5,1167.0 L147.0,1167.0 L147.0,1183.0" fill="none" stroke="#94A3B8" stroke-width="1.3" marker-end="url(#ar2)"/>
+<circle cx="147.0" cy="33.0" r="13" fill="#0E7490"/>
+<rect x="13.0" y="84.0" width="268.0" height="38.0" rx="6" fill="#E6F4F8" stroke="#0E7490" stroke-width="1.3"/>
+<text x="147.0" y="108.0" text-anchor="middle" font-size="13.0" fill="#12333D">上传海洋生物图片（1～5 张）</text>
+<rect x="13.0" y="156.0" width="268.0" height="38.0" rx="6" fill="#E6F4F8" stroke="#0E7490" stroke-width="1.3"/>
+<text x="147.0" y="171.0" text-anchor="middle" font-size="13.0" fill="#12333D">设置识别参数（模式、置信度阈值、候选</text>
+<text x="147.0" y="189.0" text-anchor="middle" font-size="13.0" fill="#12333D">数）</text>
+<rect x="13.0" y="228.0" width="268.0" height="38.0" rx="6" fill="#E6F4F8" stroke="#0E7490" stroke-width="1.3"/>
+<text x="147.0" y="252.0" text-anchor="middle" font-size="13.0" fill="#12333D">发起智能识别</text>
+<rect x="307.0" y="300.0" width="251.0" height="38.0" rx="6" fill="#E6F4F8" stroke="#0E7490" stroke-width="1.3"/>
+<text x="432.5" y="315.0" text-anchor="middle" font-size="13.0" fill="#12333D">图片预处理与敏感信息过滤（去除 EXI</text>
+<text x="432.5" y="333.0" text-anchor="middle" font-size="13.0" fill="#12333D">F）</text>
+<rect x="307.0" y="372.0" width="251.0" height="38.0" rx="6" fill="#E6F4F8" stroke="#0E7490" stroke-width="1.3"/>
+<text x="432.5" y="396.0" text-anchor="middle" font-size="13.0" fill="#12333D">调用大模型多模态接口（超时与重试）</text>
+<rect x="584.0" y="444.0" width="237.0" height="38.0" rx="6" fill="#E6F4F8" stroke="#0E7490" stroke-width="1.3"/>
+<text x="702.5" y="459.0" text-anchor="middle" font-size="13.0" fill="#12333D">多模态识别：图像 → 物种名称与置</text>
+<text x="702.5" y="477.0" text-anchor="middle" font-size="13.0" fill="#12333D">信度</text>
+<polygon points="432.5,516.0 558.0,545.0 432.5,574.0 307.0,545.0" fill="#FEF6E7" stroke="#B45309" stroke-width="1.4"/>
+<text x="432.5" y="541.5" text-anchor="middle" font-size="12.0" fill="#7A4A08">最高置信度是否 ≥ 设定阈值</text>
+<text x="432.5" y="557.5" text-anchor="middle" font-size="12.0" fill="#7A4A08">？</text>
+<rect x="307.0" y="608.0" width="251.0" height="38.0" rx="6" fill="#E6F4F8" stroke="#0E7490" stroke-width="1.3"/>
+<text x="432.5" y="632.0" text-anchor="middle" font-size="13.0" fill="#12333D">返回最优结果与 Top N 候选列表</text>
+<rect x="307.0" y="680.0" width="251.0" height="38.0" rx="6" fill="#E6F4F8" stroke="#0E7490" stroke-width="1.3"/>
+<text x="432.5" y="704.0" text-anchor="middle" font-size="13.0" fill="#12333D">与模块二物种库比对，推荐关联记录</text>
+<rect x="847.0" y="752.0" width="164.0" height="38.0" rx="6" fill="#E6F4F8" stroke="#0E7490" stroke-width="1.3"/>
+<text x="929.0" y="767.0" text-anchor="middle" font-size="13.0" fill="#12333D">提供物种库匹配与已有</text>
+<text x="929.0" y="785.0" text-anchor="middle" font-size="13.0" fill="#12333D">记录</text>
+<rect x="13.0" y="824.0" width="268.0" height="38.0" rx="6" fill="#E6F4F8" stroke="#0E7490" stroke-width="1.3"/>
+<text x="147.0" y="848.0" text-anchor="middle" font-size="13.0" fill="#12333D">查看识别结果与候选列表</text>
+<rect x="13.0" y="896.0" width="268.0" height="38.0" rx="6" fill="#E6F4F8" stroke="#0E7490" stroke-width="1.3"/>
+<text x="147.0" y="920.0" text-anchor="middle" font-size="13.0" fill="#12333D">选择候选物种</text>
+<rect x="13.0" y="608.0" width="268.0" height="38.0" rx="6" fill="#E6F4F8" stroke="#0E7490" stroke-width="1.3"/>
+<text x="147.0" y="632.0" text-anchor="middle" font-size="13.0" fill="#12333D">对低置信度结果发起人工确认流程</text>
+<rect x="13.0" y="968.0" width="268.0" height="38.0" rx="6" fill="#E6F4F8" stroke="#0E7490" stroke-width="1.3"/>
+<text x="147.0" y="992.0" text-anchor="middle" font-size="13.0" fill="#12333D">采纳并关联 / 新建物种记录</text>
+<rect x="307.0" y="1040.0" width="251.0" height="38.0" rx="6" fill="#E6F4F8" stroke="#0E7490" stroke-width="1.3"/>
+<text x="432.5" y="1064.0" text-anchor="middle" font-size="13.0" fill="#12333D">将图片与分布点写入物种记录</text>
+<rect x="307.0" y="1112.0" width="251.0" height="38.0" rx="6" fill="#E6F4F8" stroke="#0E7490" stroke-width="1.3"/>
+<text x="432.5" y="1127.0" text-anchor="middle" font-size="13.0" fill="#12333D">记录识别日志（时间、置信度、操作人</text>
+<text x="432.5" y="1145.0" text-anchor="middle" font-size="13.0" fill="#12333D">）</text>
+<circle cx="147.0" cy="1201.0" r="14" fill="#FFFFFF" stroke="#0E7490" stroke-width="2"/>
+<circle cx="147.0" cy="1201.0" r="8.5" fill="#0E7490"/>
+</g></svg>

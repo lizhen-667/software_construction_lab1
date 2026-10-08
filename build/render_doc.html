@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>海洋生物多样性信息管理系统 系统原型</title>
+<base href="http://127.0.0.1:8788/">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  @page { size: A4; margin: 20mm 17mm 18mm 17mm; }
+
+  html, body { margin: 0; padding: 0; background: #fff; }
+  body {
+    font-family: "SimSun", "宋体", "Songti SC", serif;
+    font-size: 12pt; line-height: 1.45; color: #000;   /* 宋体小四号，1.25 倍行距 */
+  }
+  #doc { width: 176mm; margin: 0 auto; }
+
+  /* 一 / 二 / 三级标题：黑体小四号，行距 1.25 倍，段前段后各 0.5 行 */
+  h1, h2, h3, h4 { font-family: "SimHei", "黑体", "Heiti SC", sans-serif; font-weight: normal;
+    font-size: 12pt; line-height: 1.45; margin: 9pt 0;
+    page-break-after: avoid; break-after: avoid; }
+  h1 { font-size: 16pt; text-align: center; margin: 0 0 2pt; }
+
+  /* 封面 */
+  p.sub1 { text-align: center; text-indent: 0; font-family: "SimHei", "黑体", sans-serif;
+    font-size: 14pt; margin: 0; }
+  p.sub2 { text-align: center; text-indent: 0; font-family: "SimHei", "黑体", sans-serif;
+    font-size: 18pt; margin: 14pt 0 8pt; }
+  p.meta { text-align: center; text-indent: 0; font-size: 11pt; margin: 0 0 12pt; }
+
+  p { margin: 0 0 6pt; text-align: justify; }
+  /* 正文首行缩进 2 字符 */
+  #doc > p { text-indent: 2em; }
+  #doc p.sub1, #doc p.sub2, #doc p.meta, #doc p.cap-t { text-indent: 0; }
+  #doc p:has(> img) { text-indent: 0; text-align: center; margin: 8pt 0 2pt; }
+
+  ul, ol { margin: 0 0 6pt; padding-left: 2.2em; }
+  li { margin-bottom: 2pt; }
+
+  strong, b { font-family: "SimHei", "黑体", sans-serif; font-weight: normal; }
+
+  hr { border: none; border-top: 1px solid #999; margin: 10pt 0; }
+
+  /* 表格 */
+  table { border-collapse: collapse; width: 100%; margin: 7pt 0 10pt;
+    font-size: 10pt; line-height: 1.35; page-break-inside: avoid; }
+  th, td { border: 1px solid #666; padding: 3.5pt 5pt; text-align: left; vertical-align: top; }
+  th { background: #eef2f5; font-family: "SimHei", "黑体", sans-serif; font-weight: normal;
+    text-align: center; }
+  table th:first-child, table td:first-child { }
+
+  /* 图片与图题 */
+  img { max-width: 100%; height: auto; display: block; margin: 0 auto;
+    border: 1px solid #999; page-break-inside: avoid; }
+  /* 图题：置于图下方，居中 */
+  p[align="center"] { text-align: center; text-indent: 0;
+    font-family: "SimHei", "黑体", sans-serif; font-size: 10.5pt;
+    margin: 3pt 0 12pt; page-break-before: avoid; }
+  /* 表题：置于表上方，居中 */
+  p.cap-t { text-align: center; text-indent: 0;
+    font-family: "SimHei", "黑体", sans-serif; font-size: 10.5pt;
+    margin: 10pt 0 2pt; page-break-after: avoid; break-after: avoid; }
+  p.cap-t + table { margin-top: 2pt; }
+
+  /* 原型绘制说明块 */
+  blockquote { margin: 5pt 0 9pt; padding: 6pt 10pt; border-left: 2.5pt solid #0E7490;
+    background: #F2FAFC; }
+  blockquote p { text-indent: 0; margin: 0 0 3pt; font-size: 10.5pt; line-height: 1.4; }
+  blockquote p:first-child { font-size: 11pt; color: #0E7490; margin-bottom: 4pt; }
+  blockquote ul { margin: 2pt 0 3pt; padding-left: 1.5em; }
+  blockquote li { font-size: 10pt; line-height: 1.4; margin-bottom: 2.5pt; }
+  blockquote strong { font-family: "SimHei", "黑体", sans-serif; font-weight: normal; }
+
+  code { font-family: Consolas, "Courier New", monospace; font-size: 10pt; }
+
+  /* 分页符（文档中的 <div style="page-break-after: always">） */
+  .pagebreak, div[style*="page-break-after"] { break-after: page; page-break-after: always;
+    height: 0; margin: 0; }
+</style>
+</head>
+<body>
+<div id="doc"></div>
+<script>
+const MD_FILE = '海洋生物多样性信息管理系统-系统原型.md';
+
+(async () => {
+  try {
+    document.getElementById('doc').innerHTML = '<p>正在加载文档…</p>';
+    const res = await fetch(encodeURI(MD_FILE));
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    let md = await res.text();
+
+    // 去掉顶部用于页面的 HTML 包装
+    const html = marked.parse(md, { breaks: false, gfm: true });
+    const doc = document.getElementById('doc');
+    doc.innerHTML = html;
+
+    doc.querySelectorAll('div[style*="page-break-after"]').forEach((el) => el.classList.add('pagebreak'));
+
+    // 图片加载完成后再置位（本文档无插图，保留兼容）
+    const imgs = [...doc.querySelectorAll('img')];
+    await Promise.all(imgs.map((im) => im.complete ? Promise.resolve()
+      : new Promise((ok) => { im.onload = ok; im.onerror = ok; })));
+
+    window.__ready = true;
+    window.__stats = {
+      paragraphs: doc.querySelectorAll('p').length,
+      images: imgs.length,
+      brokenImages: imgs.filter((i) => !i.naturalWidth).length,
+      draws: doc.querySelectorAll('blockquote').length,
+      tables: doc.querySelectorAll('table').length
+    };
+  } catch (e) {
+    window.__error = String(e && e.message || e);
+    window.__ready = true;
+  }
+})();
+</script>
+</body>
+</html>

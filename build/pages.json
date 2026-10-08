@@ -1,0 +1,218 @@
+[
+  {
+    "id": "MB-USER-1",
+    "title": "用户登录",
+    "group": "模块一 用户与权限管理",
+    "file": "MB-USER-1.html"
+  },
+  {
+    "id": "MB-USER-2",
+    "title": "用户注册申请",
+    "group": "模块一 用户与权限管理",
+    "file": "MB-USER-2.html"
+  },
+  {
+    "id": "MB-USER-3",
+    "title": "注册申请审核",
+    "group": "模块一 用户与权限管理",
+    "file": "MB-USER-3.html"
+  },
+  {
+    "id": "MB-USER-4",
+    "title": "注册申请审核处理",
+    "group": "模块一 用户与权限管理",
+    "file": "MB-USER-4.html"
+  },
+  {
+    "id": "MB-USER-5",
+    "title": "用户管理",
+    "group": "模块一 用户与权限管理",
+    "file": "MB-USER-5.html"
+  },
+  {
+    "id": "MB-USER-6",
+    "title": "用户角色分配",
+    "group": "模块一 用户与权限管理",
+    "file": "MB-USER-6.html"
+  },
+  {
+    "id": "MB-USER-7",
+    "title": "角色权限配置",
+    "group": "模块一 用户与权限管理",
+    "file": "MB-USER-7.html"
+  },
+  {
+    "id": "MB-USER-8",
+    "title": "用户活动日志",
+    "group": "模块一 用户与权限管理",
+    "file": "MB-USER-8.html"
+  },
+  {
+    "id": "MB-USER-9",
+    "title": "个人信息维护",
+    "group": "模块一 用户与权限管理",
+    "file": "MB-USER-9.html"
+  },
+  {
+    "id": "MB-USER-10",
+    "title": "修改密码",
+    "group": "模块一 用户与权限管理",
+    "file": "MB-USER-10.html"
+  },
+  {
+    "id": "MB-SPEC-1",
+    "title": "物种信息列表",
+    "group": "模块二 物种信息管理",
+    "file": "MB-SPEC-1.html"
+  },
+  {
+    "id": "MB-SPEC-2",
+    "title": "新增物种信息（基本信息）",
+    "group": "模块二 物种信息管理",
+    "file": "MB-SPEC-2.html"
+  },
+  {
+    "id": "MB-SPEC-3",
+    "title": "新增物种信息（形态与分布）",
+    "group": "模块二 物种信息管理",
+    "file": "MB-SPEC-3.html"
+  },
+  {
+    "id": "MB-SPEC-4",
+    "title": "物种详情页面",
+    "group": "模块二 物种信息管理",
+    "file": "MB-SPEC-4.html"
+  },
+  {
+    "id": "MB-SPEC-5",
+    "title": "编辑物种信息",
+    "group": "模块二 物种信息管理",
+    "file": "MB-SPEC-5.html"
+  },
+  {
+    "id": "MB-SPEC-6",
+    "title": "删除物种信息",
+    "group": "模块二 物种信息管理",
+    "file": "MB-SPEC-6.html"
+  },
+  {
+    "id": "MB-SPEC-7",
+    "title": "物种高级检索",
+    "group": "模块二 物种信息管理",
+    "file": "MB-SPEC-7.html"
+  },
+  {
+    "id": "MB-ECO-1",
+    "title": "生态系统列表",
+    "group": "模块三 生态系统与观测记录管理",
+    "file": "MB-ECO-1.html"
+  },
+  {
+    "id": "MB-ECO-2",
+    "title": "新建生态系统",
+    "group": "模块三 生态系统与观测记录管理",
+    "file": "MB-ECO-2.html"
+  },
+  {
+    "id": "MB-OBS-1",
+    "title": "观测记录列表",
+    "group": "模块三 生态系统与观测记录管理",
+    "file": "MB-OBS-1.html"
+  },
+  {
+    "id": "MB-OBS-2",
+    "title": "新建观测记录（环境参数）",
+    "group": "模块三 生态系统与观测记录管理",
+    "file": "MB-OBS-2.html"
+  },
+  {
+    "id": "MB-OBS-3",
+    "title": "观测记录关联物种",
+    "group": "模块三 生态系统与观测记录管理",
+    "file": "MB-OBS-3.html"
+  },
+  {
+    "id": "MB-OBS-4",
+    "title": "观测记录详情",
+    "group": "模块三 生态系统与观测记录管理",
+    "file": "MB-OBS-4.html"
+  },
+  {
+    "id": "MB-OBS-5",
+    "title": "编辑观测记录",
+    "group": "模块三 生态系统与观测记录管理",
+    "file": "MB-OBS-5.html"
+  },
+  {
+    "id": "MB-VIS-1",
+    "title": "综合数据看板",
+    "group": "模块四 数据可视化与报表",
+    "file": "MB-VIS-1.html"
+  },
+  {
+    "id": "MB-VIS-2",
+    "title": "物种分布地图",
+    "group": "模块四 数据可视化与报表",
+    "file": "MB-VIS-2.html"
+  },
+  {
+    "id": "MB-VIS-3",
+    "title": "观测地点地图",
+    "group": "模块四 数据可视化与报表",
+    "file": "MB-VIS-3.html"
+  },
+  {
+    "id": "MB-VIS-4",
+    "title": "物种统计分析",
+    "group": "模块四 数据可视化与报表",
+    "file": "MB-VIS-4.html"
+  },
+  {
+    "id": "MB-VIS-5",
+    "title": "生态系统与观测活动统计",
+    "group": "模块四 数据可视化与报表",
+    "file": "MB-VIS-5.html"
+  },
+  {
+    "id": "MB-VIS-6",
+    "title": "报表导出",
+    "group": "模块四 数据可视化与报表",
+    "file": "MB-VIS-6.html"
+  },
+  {
+    "id": "MB-AI-1",
+    "title": "图像智能识别",
+    "group": "模块五 智能服务",
+    "file": "MB-AI-1.html"
+  },
+  {
+    "id": "MB-AI-2",
+    "title": "识别结果与物种鉴定",
+    "group": "模块五 智能服务",
+    "file": "MB-AI-2.html"
+  },
+  {
+    "id": "MB-AI-3",
+    "title": "文本辅助分类与补全",
+    "group": "模块五 智能服务",
+    "file": "MB-AI-3.html"
+  },
+  {
+    "id": "MB-AI-4",
+    "title": "智能问答与科研助手",
+    "group": "模块五 智能服务",
+    "file": "MB-AI-4.html"
+  },
+  {
+    "id": "MB-AI-5",
+    "title": "物种描述多语言支持",
+    "group": "模块五 智能服务",
+    "file": "MB-AI-5.html"
+  },
+  {
+    "id": "MB-AI-6",
+    "title": "观测智能标签与异常检测",
+    "group": "模块五 智能服务",
+    "file": "MB-AI-6.html"
+  }
+]
